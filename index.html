@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friend Request</title>
+<style>
+  body {
+    background: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+  }
+  .fade {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+  .fade.show {
+    opacity: 1;
+  }
+  .buttons {
+    margin-top: 20px;
+  }
+  button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: #ff69b4;
+    color: white;
+    transition: all 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+  }
+  #noBtn {
+    position: relative;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="text1" class="fade">Hey...</div>
+  <div id="text2" class="fade">I know this might be weird...</div>
+  <div id="text3" class="fade">But you’re really cute btw 😅</div>
+  <div id="text4" class="fade">Sooo… can we be friends?</div>
+
+  <div id="buttons" class="buttons fade">
+    <button id="yesBtn">Yes 😄</button>
+    <button id="noBtn">No 😅</button>
+  </div>
+
+  <div id="advantages" class="fade"></div>
+</div>
+
+<script>
+  const text1 = document.getElementById('text1');
+  const text2 = document.getElementById('text2');
+  const text3 = document.getElementById('text3');
+  const text4 = document.getElementById('text4');
+  const buttons = document.getElementById('buttons');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const advantages = document.getElementById('advantages');
+
+  const messages = [text1, text2, text3, text4];
+
+  // Fade in texts one by one
+  let i = 0;
+  function showNext() {
+    if(i < messages.length){
+      messages[i].classList.add('show');
+      i++;
+      setTimeout(showNext, 1500);
+    } else {
+      buttons.classList.add('show');
+    }
+  }
+  showNext();
+
+  // Move "No" button randomly on hover
+  noBtn.addEventListener('mouseenter', () => {
+    const x = Math.random() * 200 - 100; // -100 to +100 px
+    const y = Math.random() * 50 - 25; 
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  // Yes button click
+  yesBtn.addEventListener('click', () => {
+    container.innerHTML = `<div class="fade show">
+      <h2>Advantages of being friends with me 😎</h2>
+      <p>💻 I can code anything (even this site 😏)</p>
+      <p>😂 I’ll make you laugh at least once a day</p>
+      <p>☕ I bring good vibes (and coffee if needed)</p>
+      <p>🎧 Share cool music sometimes</p>
+    </div>`;
+  });
+</script>
+
+</body>
+</html>
